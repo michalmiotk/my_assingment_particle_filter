@@ -7,9 +7,11 @@ from scipy.optimize import minimize
 def distance_difference_squared(guess_location, pole, pole_measurement):
     ### STUDENT CODE START
     output = 0
+    dist_guess_pole = np.sqrt(np.power(guess_location[0]-pole[0],2) + np.power(guess_location[1]-pole[1],2))
     # calc distance between guess location and pole.
     # compare distance vs pole_measurement
     ### STUDENT CODE END
+    output = dist_guess_pole-pole_measurement
     return output**2
 
 def total_cost(guess_location, poles, pole_measurements):

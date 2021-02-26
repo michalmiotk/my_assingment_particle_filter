@@ -8,6 +8,11 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 def distance_difference_squared(guess_location, pole, pole_measurements):
     ### STUDENT CODE START
     output = 0
+    def dist_guess_pole(gl, pole):
+        return np.sqrt(np.power(gl[0]-pole[0],2) + np.power(gl[1]-pole[1],2))
+    distance = dist_guess_pole(guess_location, pole)
+    
+    output = min([(distance-meas)**2 for meas in pole_measurements])
     ### STUDENT CODE END
     return output
 

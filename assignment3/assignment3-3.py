@@ -14,7 +14,16 @@ class Robot:
     def measure(self, poles):
         ### START STUDENT CODE
         # Set self.pole_dist to the distance to the closest pole.
-
+        min_dist = None
+        for pole in poles:
+            dist = pole - self.pos
+            if 0<dist< self.max_measurement:
+                if min_dist is None or dist < min_dist:
+                    min_dist = dist
+        if min_dist is not None:
+            self.pole_dist = min_dist
+        else:
+            self.pole_dist = -100
         ### END STUDENT CODE
 
 class Particle(Robot):

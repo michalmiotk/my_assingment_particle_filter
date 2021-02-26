@@ -20,21 +20,24 @@ class Particle(Robot):
 
     def predict(self):
         ### START STUDENT CODE
+        self.pos += self.move_dist
         ### END STUDENT CODE
 
 def resample_particles(particles):
     ### START STUDENT CODE
     # Please fill this array with the output of the r.choices function.
     resample = []
-    print(resample)
-    
+    for particle in particles:
+        resample.append(particle.weight)
     # Please fill this array with resampled partciles.
     resampled_particles = []
-
+    for _ in range(num_particles):
+        resampled_particles += r.choices(particles, resample)
     ### END STUDENT CODE
 
     # Set all resampled particles to a different color.
-    for i in resample:
+    for i in range(len(resample)):
+        resampled_particles[i] = Particle(resampled_particles[i].pos) #do it initialization instead deepcopy
         resampled_particles[-1].color = (0, 1, 0, 1)
 
     # Plot and return resampled particles.

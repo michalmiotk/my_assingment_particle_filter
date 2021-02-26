@@ -6,6 +6,9 @@ import numpy as np
 def distance(location, pole_location):
     ### STUDENT CODE START
     output = 0
+    first_axis_dist = location[0]-pole_location[0]
+    second_axis_dist = location[1]-pole_location[1]
+    output = np.sqrt(np.power(first_axis_dist,2)+np.power(second_axis_dist,2))
     ### STUDENT CODE END
     return output
 

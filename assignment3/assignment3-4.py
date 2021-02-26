@@ -18,10 +18,14 @@ class Particle(Robot):
 
     def probability_density_function(self, mu, x):
         ### STUDENT CODE START
+        nominator = np.exp(-np.power(x-mu,2)/(2*np.power(self.measurement_sigma,2)))
+        denominator = self.measurement_sigma*np.sqrt(2*np.pi)
+        return nominator/denominator
         ### STUDENT CODE END
 
     def update_weight(self, robot_dist):
         ### STUDENT CODE START
+        self.weight = self.probability_density_function(self.pole_dist, robot_dist)
         ### STUDENT CODE START
 
 
@@ -48,7 +52,7 @@ print()
 
 # Update Particle Weigth based on robot measurement.
 robot_dist = 3.0
-particle.pole_dist = 3.0
+particle.pole_dist = 1.0
 particle.update_weight(robot_dist)
 print("Particle Weight: " + str(round(particle.weight, 2)))
 plt.plot(x, y, '-r')

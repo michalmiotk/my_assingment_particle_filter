@@ -25,18 +25,19 @@ class Particle(Robot):
         Robot.__init__(self, pos)
         self.belief = 1
         self.color = color
-
+        
     def predict(self):
         # START STUDENT CODE
         # Move the particle the same distance as the robot moves.
-
+        self.pos +=1
         # END STUDENT CODE
 
     def update_belief(self, robot_pole_detected):
         # START STUDENT CODE
         # Set the belief to 0 if the robot detection and the particle detection
         # don't match.
-
+        if robot_pole_detected != self.pole_detected:
+            self.belief = 0
         # END STUDENT CODE
 
         # Setup Robot Location
