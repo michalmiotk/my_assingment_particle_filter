@@ -68,9 +68,9 @@ class Robot(Position):
 
 
 class Particle(Robot):
-    def __init__(self, pos):
+    def __init__(self, pos, weight=1):
         Robot.__init__(self, pos)
-        self.weight = 0.0
+        self.weight = weight
         self.distance_sigma = 5
         self.distance_weight = 1
         self.distance_distribution_peak = 1 / \
@@ -78,7 +78,7 @@ class Particle(Robot):
         self.angle_sigma = 0.5
         self.angle_distribution_peak = 1 / \
             (math.sqrt(2 * math.pi) * self.angle_sigma)
-        self.angle_weight = 1
+        self.angle_weight = 0.1
         self.theta_dot_sigma = 0.2
         self.speed_sigma = 0.5
 
@@ -102,7 +102,7 @@ class Particle(Robot):
             w = self.probability_density_function(distance-m.distance, self.distance_sigma, self.distance_distribution_peak)
             w += self.probability_density_function(self.theta-m.angle, self.angle_sigma, self.angle_distribution_peak)
             weights.append(w)
-        self.weight = min(weights)
+        self.weight = sum(weights)
         ### END STUDENT CODE
 
 
@@ -114,7 +114,7 @@ def resample_particles(particles):
 
     for i in range(len(particles)):
         resampled += r.choices(particles,weights)
-    scale = len(resampled)/sum([r.weight for r in resampled])
+    scale = len(resampled)/(5*sum([r.weight for r in resampled]))
     if scale>10:
         scale = 10
     for i in range(len(particles)):
